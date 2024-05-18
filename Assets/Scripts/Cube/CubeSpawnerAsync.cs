@@ -1,19 +1,21 @@
 using UnityEngine;
-using System.Collections;
+using System.Threading.Tasks;
 
 public class CubeSpawnerAsync : MonoBehaviour
 {
     [SerializeField] private Cube cubePrefab;
     [SerializeField] private float count = 3;
     
-    private async void Awake()
+    private void Awake()
     {
+        Task[] tasks = new Task[(int)count];
         for (int i = 0; i < count; i++)
         {
             Cube cube = NextCube(i); 
             int randomNumber = Random.Range(1, 20);
-            await cube.MoveAsyncStart(randomNumber);
-            await cube.ColorChangeAsyncStart();
+ 
+            tasks[i] = cube.MoveAsyncStart(randomNumber); 
+            tasks[i] = cube.ColorChangeAsyncStart();
         }
         print($"The cube from async method are over");
     }

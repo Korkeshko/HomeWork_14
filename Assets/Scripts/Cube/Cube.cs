@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 public class Cube : MonoBehaviour
 {
-    
     [SerializeField]
     private float finalPositionZ = 20f;
     private new Rigidbody rigidbody;
@@ -35,7 +34,6 @@ public class Cube : MonoBehaviour
         }
     }
     #endregion
-    
 
     #region Async
     public async Task MoveAsyncStart(float duration)
@@ -46,10 +44,8 @@ public class Cube : MonoBehaviour
         {
             CancellationToken cancellationToken = cancellationTokenSource.Token;
             
-            await rigidbody.transform.DOMoveZ(finalPositionZ, duration).AsyncWaitForCompletion();
-           
+            await rigidbody.transform.DOMoveZ(finalPositionZ, duration).AsyncWaitForCompletion();       
             cancellationToken.ThrowIfCancellationRequested();
-            Debug.Log("MoveAsync completed.");
         }
         catch (OperationCanceledException)
         {
@@ -87,6 +83,9 @@ public class Cube : MonoBehaviour
             cancellationTokenSource.Dispose();
         }
     }
-        
+    #endregion
+
+    #region CoroutineWithAsync
+
     #endregion
 }

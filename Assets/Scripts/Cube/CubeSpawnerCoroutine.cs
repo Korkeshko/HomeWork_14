@@ -12,7 +12,7 @@ public class CubeSpawnerCoroutine : MonoBehaviour
         {
             Cube cube = NextCube(i); 
             int randomNumber = Random.Range(1, 20);
-            //Debug.Log($"The cube number {i} is {randomNumber} duration");
+            
             StartCoroutine(cube.MoveCoroutine(randomNumber)); 
             StartCoroutine(cube.ColorChangeCoroutine());   
             yield return null;
