@@ -84,8 +84,4 @@ public class Cube : MonoBehaviour
         }
     }
     #endregion
-
-    #region CoroutineWithAsync
-
-    #endregion
 }
