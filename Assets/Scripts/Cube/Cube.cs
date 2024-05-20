@@ -38,27 +38,21 @@ public class Cube : MonoBehaviour
     #region Async
     public async Task MoveAsyncStart(float duration)
     {
-        cancellationTokenSource = new CancellationTokenSource();
-
-        try
-        {
-            CancellationToken cancellationToken = cancellationTokenSource.Token;
-            
-            await rigidbody.transform.DOMoveZ(finalPositionZ, duration).AsyncWaitForCompletion();       
-            cancellationToken.ThrowIfCancellationRequested();
-        }
-        catch (OperationCanceledException)
-        {
-            Debug.Log("MoveAsync canceled.");
-        }
+        cancellationTokenSource = new CancellationTokenSource();  
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+        
+        await rigidbody.transform.DOMoveZ(finalPositionZ, duration).AsyncWaitForCompletion();       
+        cancellationToken.ThrowIfCancellationRequested();
+        
     }
 
     public async Task ColorChangeAsyncStart()
     {
         cancellationTokenSource = new CancellationTokenSource();
 
-        try
-        {
+        // try catch на релизе не используется
+        // try 
+        // {
             CancellationToken cancellationToken = cancellationTokenSource.Token;
 
             while (true)
@@ -68,11 +62,11 @@ public class Cube : MonoBehaviour
                                                                                 
                 await Task.Delay(UnityEngine.Random.Range(3000, 5000));
             }
-        }
-        catch (OperationCanceledException)
-        {
-            Debug.Log("ColorChangeAsync canceled.");
-        }  
+        // }
+        // catch (OperationCanceledException)
+        // {
+        //     Debug.Log("ColorChangeAsync canceled.");
+        // }  
     }
 
     private void OnDestroy()
